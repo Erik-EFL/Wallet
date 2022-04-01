@@ -1,10 +1,9 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { REQUEST_API, RECEIVE_CURRENCIES } from '../actions';
+import { REQUEST_API, RECEIVE_CURRENCIES } from '../actions/actionTypes';
 
 const INICIAL_STATE = {
   wallet: {
     currencies: [],
-    expenses: [],
     isFetching: false,
   },
 };
@@ -18,7 +17,7 @@ const wallet = (state = INICIAL_STATE, action) => {
   case RECEIVE_CURRENCIES:
     return {
       ...state,
-      currencies: action.value,
+      currencies: action.currencies,
     };
   default:
     return state;

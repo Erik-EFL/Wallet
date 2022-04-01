@@ -1,0 +1,3 @@
+export const USER_LOGIN = 'USER_LOGIN';
+export const REQUEST_API = 'REQUEST_API';
+export const RECEIVE_CURRENCIES = 'RECEIVE_CURRENCIES';
