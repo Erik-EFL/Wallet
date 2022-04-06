@@ -1,11 +1,12 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { REQUEST_API, RECEIVE_CURRENCIES } from '../actions/actionTypes';
+import {
+  REQUEST_API, RECEIVE_CURRENCIES, RECEIVE_EXPENSES }
+from '../actions/actionTypes';
 
 const INICIAL_STATE = {
-  wallet: {
-    currencies: [],
-    isFetching: false,
-  },
+  currencies: [],
+  expenses: [],
+  isFetching: false,
 };
 
 const wallet = (state = INICIAL_STATE, action) => {
@@ -19,6 +20,18 @@ const wallet = (state = INICIAL_STATE, action) => {
       ...state,
       currencies: action.currencies,
     };
+  case RECEIVE_EXPENSES:
+  {
+    const expensesProcessing = state.expenses.length;
+    const expenseObj = {
+      ...action.expense,
+      id: !expensesProcessing ? 0 : expensesProcessing,
+    };
+    return {
+      ...state,
+      expenses: [...state.expenses, expenseObj],
+    };
+  }
   default:
     return state;
   }

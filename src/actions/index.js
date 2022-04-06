@@ -1,14 +1,5 @@
 // Coloque aqui suas action
-import { USER_LOGIN, RECEIVE_CURRENCIES, REQUEST_API } from './actionTypes';
-
-/* Actions */
-export const login = (email) => ({ type: USER_LOGIN, email });
-
-export const requestAPI = () => ({ type: REQUEST_API });
-
-export const getCurrencies = (currencies) => (
-  { type: RECEIVE_CURRENCIES, currencies }
-);
+import { getCurrencies, sendExpenses, requestAPI } from './actions';
 
 /* API request */
 export const fetchDataCurrencies = () => async (dispatch) => {
@@ -18,4 +9,11 @@ export const fetchDataCurrencies = () => async (dispatch) => {
     .then((currencies) => dispatch(getCurrencies(
       Object.keys(currencies).filter((item) => item !== 'USDT'),
     )));
+};
+
+export const fetchDataExpenses = (expanse) => async (dispatch) => {
+  dispatch(requestAPI());
+  const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+  const data = await response.json();
+  dispatch(sendExpenses(expanse, data));
 };
